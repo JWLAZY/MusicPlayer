@@ -35,11 +35,49 @@
                             <outlet property="delegate" destination="oSX-qj-s8H" id="MQj-pf-Trn"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="音乐列表" id="wk7-Y7-pmL"/>
+                    <navigationItem key="navigationItem" title="音乐列表" id="wk7-Y7-pmL">
+                        <barButtonItem key="rightBarButtonItem" title="播放页面" id="ZVW-Cb-9hI">
+                            <connections>
+                                <action selector="showPlayingVC:" destination="oSX-qj-s8H" id="CRP-43-R1C"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Y3-2j-9fa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1153" y="1034"/>
+        </scene>
+        <!--Music Playing Controller-->
+        <scene sceneID="PPs-Xd-OZP">
+            <objects>
+                <viewController storyboardIdentifier="PlayingVC" id="vwb-OG-ZGz" customClass="MusicPlayingController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Cgc-Ub-MQz"/>
+                        <viewControllerLayoutGuide type="bottom" id="dXZ-La-2zp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="M9e-CH-4fe">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="luC-j1-1OG">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <items>
+                                    <navigationItem id="5IR-nO-Dce">
+                                        <barButtonItem key="leftBarButtonItem" title="返回" id="f1c-Mk-n3o">
+                                            <connections>
+                                                <action selector="disMissAction:" destination="vwb-OG-ZGz" id="rkC-R4-E1I"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LP8-n4-h31" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1781" y="1050"/>
         </scene>
     </scenes>
 </document>

@@ -9,9 +9,11 @@
 #import "MusicListController.h"
 #import "MusicItemCell.h"
 #import "MusicListHelper.h"
+#import "MusicPlayingController.h"
 
 @interface MusicListController ()
-
+//因为播放页面一直存在,所以做成一个属性直接放在列表页面
+@property (nonatomic,strong) MusicPlayingController * playingController;
 @end
 
 @implementation MusicListController
@@ -60,6 +62,11 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    //这个就是将播放页面显示出来
+    [self showDetailViewController:self.playingController sender:nil];
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -103,5 +110,20 @@
     // Pass the selected object to the new view controller.
 }
 */
+#pragma mark - 点击事件
+- (IBAction)showPlayingVC:(id)sender {
+    [self showDetailViewController:self.playingController sender:nil];
+}
+
+
+
+
+#pragma mark - lazy load
+- (MusicPlayingController *)playingController{
+    if (_playingController == nil) {
+        _playingController = [MusicPlayingController shareController];
+    }
+    return  _playingController;
+}
 
 @end

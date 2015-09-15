@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4611B6081BA7ABA2009BAEF9 /* MusicPlayingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4611B6071BA7ABA2009BAEF9 /* MusicPlayingController.m */; };
 		461D3C751BA66EA900E41466 /* MusicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 461D3C741BA66EA900E41466 /* MusicItem.m */; };
 		4669A6C31BA67060001BB725 /* MusicListHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4669A6C21BA67060001BB725 /* MusicListHelper.m */; };
 		4669A6E61BA6755F001BB725 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4669A6C61BA6755F001BB725 /* MKAnnotationView+WebCache.m */; };
@@ -47,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4611B6061BA7ABA2009BAEF9 /* MusicPlayingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicPlayingController.h; sourceTree = "<group>"; };
+		4611B6071BA7ABA2009BAEF9 /* MusicPlayingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicPlayingController.m; sourceTree = "<group>"; };
 		461D3C711BA66D7900E41466 /* URLs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLs.h; sourceTree = "<group>"; };
 		461D3C721BA66DF300E41466 /* MusicPlayer0622.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MusicPlayer0622.pch; sourceTree = "<group>"; };
 		461D3C731BA66EA900E41466 /* MusicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicItem.h; sourceTree = "<group>"; };
@@ -339,6 +342,8 @@
 			children = (
 				46885D331BA665D4008A5404 /* MusicListController.h */,
 				46885D341BA665D4008A5404 /* MusicListController.m */,
+				4611B6061BA7ABA2009BAEF9 /* MusicPlayingController.h */,
+				4611B6071BA7ABA2009BAEF9 /* MusicPlayingController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -471,6 +476,7 @@
 				4669A6E91BA6755F001BB725 /* SDWebImageCompat.m in Sources */,
 				461D3C751BA66EA900E41466 /* MusicItem.m in Sources */,
 				4669A6C31BA67060001BB725 /* MusicListHelper.m in Sources */,
+				4611B6081BA7ABA2009BAEF9 /* MusicPlayingController.m in Sources */,
 				4669A6F11BA6755F001BB725 /* UIImage+MultiFormat.m in Sources */,
 				4669A6F31BA6755F001BB725 /* UIImageView+HighlightedWebCache.m in Sources */,
 				4669A6F01BA6755F001BB725 /* UIImage+GIF.m in Sources */,
