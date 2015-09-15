@@ -12,15 +12,22 @@
 #import "UIImageView+WebCache.h"
 #import "AudioPlayer.h"
 
+
 @interface MusicPlayingController ()<AudioPlayerDelegate>
 - (IBAction)disMissAction:(id)sender;
 - (IBAction)startOrPuase:(id)sender;
+- (IBAction)proviousAction:(id)sender;
+- (IBAction)nextAction:(id)sender;
+
 
 //当前播放音乐的模型
 @property (nonatomic,strong) MusicItem * currentModel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *img4MusicPic;
+@property (weak, nonatomic) IBOutlet UILabel *lab4playedTime;
+@property (weak, nonatomic) IBOutlet UILabel *lab4LastTime;
 
+@property (weak, nonatomic) IBOutlet UISlider *slider4Time;
 
 //当前正在播放的索引
 @property (nonatomic,assign) NSInteger currentIndex;
@@ -69,6 +76,8 @@
     self.img4MusicPic.layer.masksToBounds = YES;
     self.img4MusicPic.layer.cornerRadius = 100;
     // Do any additional setup after loading the view.
+    
+    [self.slider4Time addTarget:self action:@selector(timeSliderAction:) forControlEvents:UIControlEventValueChanged];
 }
 
 
@@ -95,17 +104,20 @@
     
     //可以根据获取到当前播放的音乐model 更新UI
     [self.img4MusicPic sd_setImageWithURL:[NSURL URLWithString:self.currentModel.picUrl]];
+    
+    //更新slider 的进度
+    
+    //改变进度条的最大值
+    self.slider4Time.maximumValue = [self.currentModel.duration floatValue] / 1000;
+    
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//时间滑条拖动事件
+- (void)timeSliderAction:(UISlider *)sender{
+    NSLog(@"%f",sender.value);
+    
+    [[AudioPlayer sharedPlayer] seekToTime:sender.value];
+    
 }
-*/
 
 //返回按钮
 - (IBAction)disMissAction:(id)sender {
@@ -123,18 +135,61 @@
     }
     
 }
+
+- (IBAction)proviousAction:(id)sender {
+    _currentIndex--;
+    
+    if (_currentIndex < 0) {
+        _currentIndex = [MusicListHelper sharedHelp].allMusic.count - 1;
+    }
+    
+    [self startPlay];
+}
+
+- (IBAction)nextAction:(id)sender {
+    _currentIndex++;
+    
+    if (_currentIndex >= [MusicListHelper sharedHelp].allMusic.count) {
+        _currentIndex = 0;
+    }
+    
+    [self startPlay];
+}
 #pragma mark - AudioPlayerDelegate
+//回调时间 : progress 当前播放的秒数
 -(void)audioplayerPlayWith:(AudioPlayer *)audioplayer Progress:(float)progress{
     NSLog(@"%f",progress);
+    
+    //旋转图片
     self.img4MusicPic.transform = CGAffineTransformRotate(self.img4MusicPic.transform, M_PI / 100);
+    
+    //更新时间
+    
+    //已经播放时间
+    int minutes = (int)progress / 60;
+    int seconds = (int)progress % 60;
+    
+    float lastTime = [_currentModel.duration floatValue] / 1000 - progress;
+    //剩余时间
+    int minutes2 = (int)lastTime / 60;
+    int seconds2 = (int) lastTime % 60;
+    
+    self.lab4playedTime.text = [NSString stringWithFormat:@"%d:%d",minutes,seconds];
+    
+    self.lab4LastTime.text = [NSString stringWithFormat:@"%d:%d",minutes2,seconds2];
+    
+    //更新进度条
+    self.slider4Time.value = progress;
+}
+- (void)audioplayerDidFinishItem:(AudioPlayer *)audioplayer{
+    [self nextAction:nil];
 }
 
 #pragma mark - lazy load
 //重写get方法
 - (MusicItem *)currentModel{
     
-    
-    _currentModel = [[MusicListHelper sharedHelp] itemWithIndex:_index];
+    _currentModel = [[MusicListHelper sharedHelp] itemWithIndex:_currentIndex];
     return _currentModel;
 }
 

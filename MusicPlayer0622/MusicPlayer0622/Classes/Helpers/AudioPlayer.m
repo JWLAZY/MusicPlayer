@@ -35,6 +35,16 @@
     return player;
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        //通知中心
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endAction:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    }
+    return self;
+}
+
 - (void)setPrepareMusicWithURL:(NSString *)urlStr{
     
     if (self.player.currentItem) {
@@ -82,6 +92,21 @@
     _timer = nil;
 }
 
+
+- (void)seekToTime:(float)time{
+    
+    //当音乐播放器时间改变时,先暂停,后播放
+    [self pause];
+    
+    [self.player seekToTime:CMTimeMakeWithSeconds(time, self.player.currentTime.timescale) completionHandler:^(BOOL finished) {
+        
+        if (finished) {
+            [self play];
+        }
+
+    }];
+}
+
 //每隔0.1秒执行一下这个事件
 - (void)playingAction:(id)sender{
     if (self.delegate && [self.delegate respondsToSelector:@selector(audioplayerPlayWith:Progress:)]) {
@@ -111,6 +136,12 @@
             break;
     }
     NSLog(@"change:%@",change);
+}
+//当一首歌播放结束时会执行下面方法
+- (void)endAction:(NSNotification *)not{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(audioplayerDidFinishItem:)]) {
+        [self.delegate audioplayerDidFinishItem:self];
+    }
 }
 
 

@@ -25,7 +25,7 @@
 //歌手
 @property (nonatomic,strong) NSString * singer;
 //持续时间
-@property (nonatomic,assign) NSInteger  duration;
+@property (nonatomic,strong) NSString * duration;
 //歌手名字
 @property (nonatomic,strong) NSString * artists_name;
 

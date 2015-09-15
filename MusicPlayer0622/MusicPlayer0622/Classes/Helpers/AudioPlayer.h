@@ -12,6 +12,10 @@
 //再播放中每秒都执行的事件
 - (void)audioplayerPlayWith:(AudioPlayer *)audioplayer Progress:(float)progress;
 
+//当一首歌曲播放完成之后执行这个时间
+- (void)audioplayerDidFinishItem:(AudioPlayer *)audioplayer;
+
+
 @end
 
 
@@ -26,6 +30,8 @@
 - (void)play;
 
 - (void)pause;
+
+- (void)seekToTime:(float)time;
 
 - (void)setPrepareMusicWithURL:(NSString *)urlStr;
 

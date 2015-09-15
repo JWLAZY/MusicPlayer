@@ -141,6 +141,9 @@
                                             <color key="titleColor" red="1" green="0.1624611725" blue="0.20430913910000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="nextAction:" destination="vwb-OG-ZGz" eventType="touchUpInside" id="rD9-h0-eGg"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ofw-7k-fCI">
                                         <rect key="frame" x="285" y="113" width="30" height="30"/>
@@ -158,6 +161,9 @@
                                             <color key="titleColor" red="1" green="0.1624611725" blue="0.20430913910000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="proviousAction:" destination="vwb-OG-ZGz" eventType="touchUpInside" id="oxN-Z5-uGi"/>
+                                        </connections>
                                     </button>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="YlM-5Y-LTi">
                                         <rect key="frame" x="188" y="52" width="225" height="31"/>
@@ -211,6 +217,9 @@
                     </view>
                     <connections>
                         <outlet property="img4MusicPic" destination="oTh-5Z-6RD" id="3PH-7m-9RU"/>
+                        <outlet property="lab4LastTime" destination="ykx-gG-rkW" id="Nj5-7i-liL"/>
+                        <outlet property="lab4playedTime" destination="cD1-aS-YVq" id="h3x-iB-aaw"/>
+                        <outlet property="slider4Time" destination="YlM-5Y-LTi" id="AHa-t7-lf5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LP8-n4-h31" userLabel="First Responder" sceneMemberID="firstResponder"/>
