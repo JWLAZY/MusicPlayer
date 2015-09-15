@@ -12,8 +12,9 @@
 #import "UIImageView+WebCache.h"
 #import "AudioPlayer.h"
 
-@interface MusicPlayingController ()
+@interface MusicPlayingController ()<AudioPlayerDelegate>
 - (IBAction)disMissAction:(id)sender;
+- (IBAction)startOrPuase:(id)sender;
 
 //当前播放音乐的模型
 @property (nonatomic,strong) MusicItem * currentModel;
@@ -59,7 +60,6 @@
     _currentIndex = _index;
     
     [self startPlay];
-    [self updateUI];
 }
 
 - (void)viewDidLoad {
@@ -69,8 +69,6 @@
     self.img4MusicPic.layer.masksToBounds = YES;
     self.img4MusicPic.layer.cornerRadius = 100;
     // Do any additional setup after loading the view.
-    
-
 }
 
 
@@ -82,11 +80,19 @@
 
 #pragma mark - 公开方法
 - (void)startPlay{
+    [self updateUI];
+    
     [[AudioPlayer sharedPlayer] setPrepareMusicWithURL:self.currentModel.mp3Url];
+    [AudioPlayer sharedPlayer].delegate = self;
+    
 }
 
 #pragma mark - 私有方法
 - (void)updateUI{
+    
+    //如果换歌的话,就让图片重新归位
+    self.img4MusicPic.transform = CGAffineTransformMakeRotation(0);
+    
     //可以根据获取到当前播放的音乐model 更新UI
     [self.img4MusicPic sd_setImageWithURL:[NSURL URLWithString:self.currentModel.picUrl]];
 }
@@ -104,6 +110,23 @@
 //返回按钮
 - (IBAction)disMissAction:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+//暂停或者播放按钮事件
+- (IBAction)startOrPuase:(id)sender {
+    UIButton *btn = (UIButton *)sender;
+    if([AudioPlayer sharedPlayer].isPlaying){
+        [[AudioPlayer sharedPlayer] pause];
+        [btn setTitle:@"播放" forState:UIControlStateNormal];
+    }else{
+        [[AudioPlayer sharedPlayer] play];
+        [btn setTitle:@"暂停" forState:UIControlStateNormal];
+    }
+    
+}
+#pragma mark - AudioPlayerDelegate
+-(void)audioplayerPlayWith:(AudioPlayer *)audioplayer Progress:(float)progress{
+    NSLog(@"%f",progress);
+    self.img4MusicPic.transform = CGAffineTransformRotate(self.img4MusicPic.transform, M_PI / 100);
 }
 
 #pragma mark - lazy load

@@ -144,10 +144,13 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ofw-7k-fCI">
                                         <rect key="frame" x="285" y="113" width="30" height="30"/>
-                                        <state key="normal" title="播放">
+                                        <state key="normal" title="暂停">
                                             <color key="titleColor" red="1" green="0.13023780930000001" blue="0.1740426246" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="startOrPuase:" destination="vwb-OG-ZGz" eventType="touchUpInside" id="fPW-pi-wc6"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wxo-tA-Ivb">
                                         <rect key="frame" x="210" y="113" width="45" height="30"/>
