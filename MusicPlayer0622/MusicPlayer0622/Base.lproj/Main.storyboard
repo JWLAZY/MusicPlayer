@@ -206,6 +206,9 @@
                             <constraint firstItem="Ped-8h-ZAT" firstAttribute="top" secondItem="luC-j1-1OG" secondAttribute="bottom" id="qGj-eQ-pNN"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="img4MusicPic" destination="oTh-5Z-6RD" id="3PH-7m-9RU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LP8-n4-h31" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -64,6 +64,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //这个就是将播放页面显示出来
+    self.playingController.index = indexPath.row;
+    
     [self showDetailViewController:self.playingController sender:nil];
 }
 
