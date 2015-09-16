@@ -19,4 +19,7 @@
 //外部访问歌词数组
 - (NSArray *)allLyric;
 
+//根据时间返回当前播放歌词在数组中的位置
+- (NSInteger)indexOfTime:(float)time;
+
 @end

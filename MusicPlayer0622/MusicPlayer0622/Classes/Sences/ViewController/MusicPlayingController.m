@@ -102,6 +102,8 @@
     [AudioPlayer sharedPlayer].delegate = self;
  
     [[LyricHelper sharedHelper] initWithLyricString:self.currentModel.lyric];
+    //在开始播放后要重新去加载数据
+    [self.lyricTableView reloadData];
 }
 
 #pragma mark - 私有方法
@@ -173,7 +175,8 @@
     
     LyricItem *item = [LyricHelper sharedHelper].allLyric[indexPath.row];
     cell.textLabel.text = item.lyric;
-    
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.font = [UIFont systemFontOfSize:14];
     return cell;
 }
 
@@ -202,6 +205,12 @@
     
     //更新进度条
     self.slider4Time.value = progress;
+    
+    //滑动到哪一行不确定
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[[LyricHelper sharedHelper] indexOfTime:progress] inSection:0];
+    [self.lyricTableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+    
 }
 - (void)audioplayerDidFinishItem:(AudioPlayer *)audioplayer{
     [self nextAction:nil];

@@ -10,9 +10,13 @@
 #import "LyricItem.h"
 
 @interface LyricHelper()
-
+{
+    //记录一下当前访问的歌词的下标
+    NSInteger _index;
+}
 //可变数组,内部访问
 @property (nonatomic,strong) NSMutableArray * allLyricMutable;
+
 
 @end
 
@@ -30,13 +34,15 @@
 
 //将lyricstring 转化为一个数组
 - (void)initWithLyricString:(NSString *)lyricString{
+    
+    _index = -1;
+    //再添加新的歌词之前一定要先把之前的歌词移除掉
+    [self.allLyricMutable removeAllObjects];
+    
     //先将字符串 根据换行符来划分
     NSArray *itemArray = [lyricString componentsSeparatedByString:@"\n"];
     
     for (NSString *itemString in itemArray) {
-        
-        
-        
         //根据括号将时间和歌词分开
         NSArray *lyricArray = [itemString componentsSeparatedByString:@"]"];
         
@@ -56,6 +62,19 @@
         [self.allLyricMutable addObject:lyric];
     }
     
+}
+
+- (NSInteger)indexOfTime:(float)time{
+    //遍历数组中的元素
+    for (int i = 0; i < _allLyricMutable.count; i++) {
+        LyricItem *item = _allLyricMutable[i];
+        if (item.time >= time) {
+            _index = (i - 1 > 0 ? i - 1 : 0);
+            //找到下标就退出这个方法
+            break;
+        }
+    }
+    return _index;
 }
 
 //外部访问歌词数组
