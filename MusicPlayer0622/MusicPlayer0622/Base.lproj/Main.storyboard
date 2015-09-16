@@ -100,6 +100,9 @@
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="F5O-ov-LBr">
                                                 <rect key="frame" x="600" y="0.0" width="600" height="250"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="vwb-OG-ZGz" id="nJd-Uy-QGc"/>
+                                                </connections>
                                             </tableView>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.1624611725" blue="0.20430913910000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -219,6 +222,7 @@
                         <outlet property="img4MusicPic" destination="oTh-5Z-6RD" id="3PH-7m-9RU"/>
                         <outlet property="lab4LastTime" destination="ykx-gG-rkW" id="Nj5-7i-liL"/>
                         <outlet property="lab4playedTime" destination="cD1-aS-YVq" id="h3x-iB-aaw"/>
+                        <outlet property="lyricTableView" destination="F5O-ov-LBr" id="Jhl-NC-xPq"/>
                         <outlet property="slider4Time" destination="YlM-5Y-LTi" id="AHa-t7-lf5"/>
                     </connections>
                 </viewController>

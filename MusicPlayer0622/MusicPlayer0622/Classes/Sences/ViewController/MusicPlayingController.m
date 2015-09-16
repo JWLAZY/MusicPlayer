@@ -11,9 +11,11 @@
 #import "MusicListHelper.h"
 #import "UIImageView+WebCache.h"
 #import "AudioPlayer.h"
+#import "LyricHelper.h"
+#import "LyricItem.h"
 
 
-@interface MusicPlayingController ()<AudioPlayerDelegate>
+@interface MusicPlayingController ()<AudioPlayerDelegate,UITableViewDataSource>
 - (IBAction)disMissAction:(id)sender;
 - (IBAction)startOrPuase:(id)sender;
 - (IBAction)proviousAction:(id)sender;
@@ -28,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lab4LastTime;
 
 @property (weak, nonatomic) IBOutlet UISlider *slider4Time;
+//歌词的tableView
+@property (weak, nonatomic) IBOutlet UITableView *lyricTableView;
 
 //当前正在播放的索引
 @property (nonatomic,assign) NSInteger currentIndex;
@@ -78,6 +82,9 @@
     // Do any additional setup after loading the view.
     
     [self.slider4Time addTarget:self action:@selector(timeSliderAction:) forControlEvents:UIControlEventValueChanged];
+    
+    //注册cell
+    [self.lyricTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
 }
 
 
@@ -93,7 +100,8 @@
     
     [[AudioPlayer sharedPlayer] setPrepareMusicWithURL:self.currentModel.mp3Url];
     [AudioPlayer sharedPlayer].delegate = self;
-    
+ 
+    [[LyricHelper sharedHelper] initWithLyricString:self.currentModel.lyric];
 }
 
 #pragma mark - 私有方法
@@ -155,6 +163,20 @@
     
     [self startPlay];
 }
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [LyricHelper sharedHelper].allLyric.count;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    LyricItem *item = [LyricHelper sharedHelper].allLyric[indexPath.row];
+    cell.textLabel.text = item.lyric;
+    
+    return cell;
+}
+
 #pragma mark - AudioPlayerDelegate
 //回调时间 : progress 当前播放的秒数
 -(void)audioplayerPlayWith:(AudioPlayer *)audioplayer Progress:(float)progress{

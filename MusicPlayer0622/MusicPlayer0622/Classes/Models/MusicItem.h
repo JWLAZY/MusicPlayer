@@ -29,5 +29,7 @@
 //歌手名字
 @property (nonatomic,strong) NSString * artists_name;
 
+@property (nonatomic,strong) NSString * lyric;
+
 
 @end
