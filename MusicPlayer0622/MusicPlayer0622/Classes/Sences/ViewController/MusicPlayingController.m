@@ -220,6 +220,9 @@
 //重写get方法
 - (MusicItem *)currentModel{
     
+    ///TODO: 更新一个大大的bug!
+    //这儿的index 不更改,下一首后(_currentIndex发生变化了.但是_index没有发生变化),下次进入这个页面时会先比较_index 和 _currentIndex ,会不一样,就回重新放歌
+    _index = _currentIndex;
     _currentModel = [[MusicListHelper sharedHelp] itemWithIndex:_currentIndex];
     return _currentModel;
 }
